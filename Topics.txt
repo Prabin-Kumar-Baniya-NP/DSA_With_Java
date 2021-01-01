@@ -1,0 +1,34 @@
+Part 1 - Basics of Java
+Part 2 - Java Collections
+
+Part 1 : Basics of Java
+1. Basics of Object Oriented Programming
+2. Writing First Java program
+3. Lexical Issues - Whitespace, Identifies, Literals, Comments, Separators, Java Keywords
+4. Data Type - Integer, Floating-Point, Character, Booleans
+5. A closer Look at Literals
+6. Variables
+7. Type Conversion and Casting
+8. Conditional Statements
+9. Loops
+10. Operators
+11. Arrays
+12. Classes
+13. Methods and Constructor
+14. Inheritance
+15. Packages and Interfaces
+16. Exception Handling
+17. Multi-threaded Programming
+18. Enumerations, Autoboxing and Annotations
+19. I/O
+20. Generics
+21. Lambda Expressions
+22. String Handling
+and many more
+
+
+Part 2 : Java Collections Framework
+1. List - ArrayList, LinkedList, Vector, Stack
+2. Queue - Queue, PriorityQueue, ArrayDeque
+3. Set - HashSet, LinkedHashSet, TreeSet
+4. Map - Hashtable, LinkedHashMap, HashMap, TreeMap
