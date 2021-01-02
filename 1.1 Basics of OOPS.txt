@@ -1,0 +1,14 @@
+Object Oriented Programming
+
+In object oriented programming, we deals with classes and objects. Classes represent the blueprint of the objects. Whereas, objects are the instance of the classes. For example: If you are building your house, you need design of the house i.e. Blueprint. This design or blueprint is nothing but class in OOPS concept. Whereas, if you make a house with that same design, then your house will be treated as an object. Therefore, classes can be said as logical structure of something and if we create anything using that logical structure then it will be called as an objects.
+
+In Object Oriented Programming, there are four essential elements - Abstraction, Encapsulation, Polymorphism and Inheritance. Let's look at this concepts.
+
+1. Abstraction:
+Abstraction is the process of hiding the unnecessary things and showing only that which is needed by the user. Using this concept, one can hide the implemtation details so that user can only focus on using the feature provided to them. 
+
+For example:  When any user discuss about car, he/she will only dicuss about the features of that car. He/she will not discuss about how the car is made, how the engines are working, how the internal structure is made because, the user has nothing to do with these things. They will be only interested on how to drive the car not how the car is made internally. This is called Abstraction. We hide the implementation information and we only expect user to use feature provided to them. 
+
+
+2. Encapsulation:
+Encapsulation is the process of binding the data and code to keep it safe from external interference. In OOPS, we encapsulate our data and code using classes. Using classes, we hide the variables used inside that class so that it will have noting to do with the outside of that class. 
