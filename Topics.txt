@@ -1,5 +1,7 @@
 Part 1 - Basics of Java
 Part 2 - Java Collections
+Part 3 - Problem Solving
+
 
 Part 1 : Basics of Java
 1. Basics of Object Oriented Programming
