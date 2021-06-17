@@ -11,6 +11,7 @@ class LinkedList{
   public void push(int item){
     if (head == null){
       head = new Node(item);
+      return ;
     }
     Node newNode = new Node(item);
     Node iteratingNode = head;
