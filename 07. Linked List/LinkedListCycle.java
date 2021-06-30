@@ -8,65 +8,19 @@ class Node{
 
 class LinkedList{
   Node head;
-  // make cycle in linkedList
-  public void makeCycle(int index){
-    int count = 0;
-    Node lastNode = head;
-    Node targetNode = head;
-    while(lastNode != null && lastNode.next != null){
-      lastNode = lastNode.next.next;
-    }
-    while(count != index){
-      targetNode = targetNode.next;
-      count++;
-    }
-    lastNode.next = targetNode.next;
-  }
-  // detect cycle in linkedList
-  public boolean detectCycle(){
-    Node fastIterator = head;
-    Node slowIterator = head;
 
-    while(fastIterator != null && fastIterator.next != null){
-      fastIterator = fastIterator.next.next;
-      slowIterator = slowIterator.next;
-      if (fastIterator == slowIterator){
-        return true;
-      }
-    }
-    return false;
-  }
-  // remove cycle in linkedlist
-  public void removeCycle(){
-    Node fastIterator = head;
-    Node slowIterator = head;
-    while(fastIterator != slowIterator){
-      fastIterator = fastIterator.next.next;
-      slowIterator = slowIterator.next;
-    }
-    slowIterator = head;
-
-    while(fastIterator.next != slowIterator.next){
-      slowIterator = slowIterator.next;
-      fastIterator = fastIterator.next.next;
-    }
-    fastIterator.next = null;
-    return ;
-  }
-  // to push item in linkedList
   public void push(int item){
-    Node newNode = new Node(item);
-    if (head == null){
+    if(head == null){
       head = new Node(item);
       return ;
     }
+    Node newNode = new Node(item);
     Node lastNode = head;
     while (lastNode.next != null){
       lastNode = lastNode.next;
     }
     lastNode.next = newNode;
   }
-  // to print linkedlist
   public void printLinkedList(){
     Node iteratingNode = head;
     while(iteratingNode != null){
@@ -74,25 +28,87 @@ class LinkedList{
       iteratingNode = iteratingNode.next;
     }
   }
-}
+  public void makeCycle(int index){
+    Node lastNode = head;
+    Node targetNode = head;
+    int count = 0;
+    while (count!= index && targetNode.next != null){
+      targetNode = targetNode.next;
+      count++;
+    }
+    while (lastNode.next != null){
+      lastNode = lastNode.next;
+    }
+    lastNode.next = targetNode;
+  }
+  public boolean detectCycle(){
+    Node slowIterator = head;
+    Node fastIterator = head;
 
+    while(fastIterator != null && fastIterator.next != null){
+      slowIterator = slowIterator.next;
+      fastIterator = fastIterator.next.next;
+      if (slowIterator == fastIterator){
+        return true;
+      }
+    }
+    return false;
+  }
+  public void removeCycle(){
+    Node slowIterator = head;
+    Node fastIterator = head;
+    do{
+      slowIterator = slowIterator.next;
+      fastIterator = fastIterator.next.next;
+    }
+    while(slowIterator != fastIterator);
+
+    slowIterator = head;
+    while(slowIterator.next != fastIterator.next){
+      slowIterator = slowIterator.next;
+      fastIterator = fastIterator.next.next;
+    }
+    fastIterator.next = null;
+  }
+  public int lengthCycle(){
+    Node slowIterator = head;
+    Node fastIterator = head;
+    int count = 0;
+    do{
+      slowIterator = slowIterator.next;
+      fastIterator = fastIterator.next.next;
+    }
+    while(slowIterator != fastIterator);
+
+    do{
+      slowIterator = slowIterator.next;
+      count = count + 1;
+    }
+    while(slowIterator != fastIterator);
+
+    return count;
+  }
+}
 
 class LinkedListCycle{
   public static void main(String args[]){
     LinkedList l = new LinkedList();
-    // to push items in linkedList
-    for(int i = 0; i <=10; i++){
-      l.push(i);
-    }
-    l.printLinkedList();
-    // to make cycle in linkedList
+    l.push(0);
+    l.push(1);
+    l.push(2);
+    l.push(3);
+    l.push(4);
+    l.push(5);
+    l.push(6);
+    l.push(7);
+    l.push(8);
+    l.push(9);
+    l.push(10);
+    l.push(11);
     l.makeCycle(5);
-    // to detect cycle in linkedList
     System.out.println(l.detectCycle());
-    // to remove cycle in linked List
+    System.out.println(l.lengthCycle());
     l.removeCycle();
-    // again check for cycle
     System.out.println(l.detectCycle());
   }
-
 }
