@@ -1,0 +1,5 @@
+JDK - It is a package that contains development tools to run our Java programs and it contains JRE to execute our program. 
+
+JRE- It is a runtime environment that run our Java programs.
+
+JVM - It acts as a runtime engine to run our Java program. JVM is responsible for executing Java programs line by line, hence it is also known as an interpreter.
