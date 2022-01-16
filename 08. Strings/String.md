@@ -71,3 +71,87 @@ System.out.println(Integer.parseInt("123"));
 ```
 System.out.println(Integer.toString(1234));
 ```
+
+---
+
+# String Builder
+
+### Creating String Builder
+
+```
+StringBuilder sb = new StringBuilder("Tony");
+```
+
+### Get character at particular index
+
+```
+System.out.println(sb.charAt(0));
+```
+
+### Set character at particular index
+
+```
+sb.setCharAt(0, 'S');
+```
+
+### Insert a character at particular index
+
+```
+sb.insert(3, 'p');
+```
+
+### delete a character from a certain range
+
+```
+sb.delete(3, 4);
+```
+
+### Append a character
+
+```
+sb.append('t');
+```
+
+# String Buffer
+
+### Creating String Buffer
+
+```
+StringBuffer sb = new StringBuffer("Tony");
+```
+
+### Get character at particular index
+
+```
+System.out.println(sb.charAt(0));
+```
+
+### Set character at particular index
+
+```
+sb.setCharAt(0, 'S');
+```
+
+### Insert a character at particular index
+
+```
+sb.insert(3, 'p');
+```
+
+### delete a character from a certain range
+
+```
+sb.delete(3, 4);
+```
+
+### Append a character
+
+```
+sb.append('t');
+```
+## Difference Between String, String Builder and String Buffer
+|   |  String | String Builder | String Buffer  |
+|---|---|---|---|
+| Modificable  |  No | Yes  | Yes  |
+| Thread-safe  |  Yes | No  | Yes  |
+|  Performance | Fast  | Fast  | Slow  |
