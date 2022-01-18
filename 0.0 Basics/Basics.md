@@ -129,3 +129,14 @@ Note: Reverse is the order for better performance of a code with corresponding t
 - It is directly proportional to the largest memory your program acquires at any instance during run time.
 - For example: int consumes 4 bytes of memory.
 ---
+
+## Operators In Java
+
+1. Unary Operator : ++, --, ~, !
+2. Arithmetic Operator : +, -, *, /
+3. Shift : >>, <<, >>>
+4. Relational: <, >, >=, <=, !=
+5. Bitwise Operator: &, |, ^
+6. Logical Operator: &&, ||
+7. Ternary Operator: ? :
+8. Assignment Operator: = += -= *= /= %= &= ^= |= <<= >>= >>>=
