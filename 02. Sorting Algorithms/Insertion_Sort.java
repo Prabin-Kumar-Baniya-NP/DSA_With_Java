@@ -3,16 +3,15 @@
 
 class Insertion_Sort {
 	public void sort(int array[]) {
-		int n = array.length;
-		for (int i = 1; i < n; i++) {
-			int key = array[i];
+		for (int i = 1; i < array.length; i++) {
+			int current = array[i];
 			int j = i - 1;
-
-			while (j >= 0 && array[j] > key) {
+			while (j >= 0 && array[j] > current) {
+				// Keep swapping
 				array[j + 1] = array[j];
-				j = j - 1;
+				j--;
 			}
-			array[j + 1] = key;
+			array[j + 1] = current;
 		}
 	}
 
