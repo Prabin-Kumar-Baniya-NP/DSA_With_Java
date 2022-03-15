@@ -10,18 +10,18 @@ public class MovingNumbers {
     }
 
     public static void moveNumbers(int[] arr) {
-        int left = 0, right = arr.length - 1;
-        while (left <= arr.length - 1 && right >= 0) {
-            if (arr[left] > 0 && arr[right] < 0) {
-                swap(arr, left, right);
+        int pivot = 0;
+        int i = 0;
+        for(int j=0; j<arr.length; j++){
+            if(arr[j] > pivot){
+                swap(arr, i, j);
+                i++;
             }
-            left++;
-            right--;
         }
     }
 
     public static void main(String[] args) {
-        int arr[] = { -12, 11, -13, -5, 6, -7, 5, -3, -6 };
+        int arr[] = {1,-1,3,2,-7,-5,11,6};
         moveNumbers(arr);
         for (int e : arr) {
             System.out.println(e);
