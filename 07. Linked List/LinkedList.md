@@ -115,3 +115,41 @@ public void deleteAtEnd(){
         iteratingNode.next = null;
     }
 ```
+
+## Reverse The Linked List
+
+### Iterative Approach
+
+```
+public void reverseIterate(){
+      if(head == null || head.next == null){
+          return ;
+      }
+      Node prevNode = head;
+      Node currentNode = head.next;
+      while(currentNode != null){
+          Node nextNode = currentNode.next;
+          currentNode.next = prevNode;
+
+          // update
+          prevNode = currentNode;
+          currentNode = nextNode;
+      }
+      head.next = null;
+      head = prevNode;
+  }
+```
+
+### Recursive Approach
+
+```
+    public Node reverseRecursively(Node head){
+        if(head == null || head.next == null){
+            return head;
+        }
+        Node newHead = reverseRecursively(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
+    }
+```
