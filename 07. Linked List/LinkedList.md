@@ -153,3 +153,80 @@ public void reverseIterate(){
         return newHead;
     }
 ```
+
+## Detect Cycle in linked list
+
+```
+    public boolean detectCycle(){
+        Node slowIterator = head;
+        Node fastIterator = head;
+        while(fastIterator != null && fastIterator.next != null){
+            slowIterator = slowIterator.next;
+            fastIterator = fastIterator.next.next;
+            if (slowIterator == fastIterator)
+                return true;
+        }
+        return false;
+    }
+```
+
+## Make cycle in linked list
+
+```
+    public void makeCycle(int index){
+        Node lastNode = head;
+        Node targetNode = head;
+        int count = 0;
+        while(count != index && targetNode.next != null){
+            targetNode = targetNode.next;
+            count++;
+        }
+        while(lastNode.next != null){
+            lastNode = lastNode.next;
+        }
+        lastNode.next = targetNode;
+    }
+```
+
+## Remove cycle in linked list
+
+```
+    public void removeCycle(){
+        Node slowIterator = head;
+        Node fastIterator = head;
+        do{
+            slowIterator = slowIterator.next;
+            fastIterator = fastIterator.next.next;
+        }
+        while(slowIterator != fastIterator);
+        slowIterator = head;
+        while(slowIterator.next != fastIterator.next){
+            slowIterator = slowIterator.next;
+            fastIterator = fastIterator.next;
+        }
+        fastIterator.next = null;
+    }
+```
+
+## Length of Cycle in Linked List
+
+```
+public int lengthCycle(){
+    Node slowIterator = head;
+    Node fastIterator = head;
+    int count = 0;
+    do{
+      slowIterator = slowIterator.next;
+      fastIterator = fastIterator.next.next;
+    }
+    while(slowIterator != fastIterator);
+
+    do{
+      slowIterator = slowIterator.next;
+      count = count + 1;
+    }
+    while(slowIterator != fastIterator);
+
+    return count;
+  }
+```
