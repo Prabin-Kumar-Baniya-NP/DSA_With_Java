@@ -230,3 +230,77 @@ public int lengthCycle(){
     return count;
   }
 ```
+
+## Middle Node of Linked List
+
+```
+// find middle of LinkedList
+  public void middleNode(){
+    if(head == null){
+      return ;
+    }
+    Node slowIterator = head;
+    Node fastIterator = head;
+    while (fastIterator != null && fastIterator.next != null){
+      slowIterator = slowIterator.next;
+      fastIterator = fastIterator.next.next;
+    }
+    System.out.println(slowIterator.data);
+  }
+```
+
+## Nth Node from the end
+
+```
+// find nth node from the end of Linked List
+// Approach - First find total no of nodes then substract it with given index
+// to find the target node and print the item in that target Node
+  public int count(){
+    Node iteratingNode = head;
+    int count = 0;
+    while (iteratingNode != null){
+      count++;
+      iteratingNode = iteratingNode.next;
+    }
+    return count;
+  }
+  public int getNthNodeFromEnd(int index){
+    int length = this.count();
+    int targetNode = length - index;
+    Node iteratingNode = head;
+    while (targetNode > 0){
+      iteratingNode = iteratingNode.next;
+      targetNode--;
+    }
+    return iteratingNode.data;
+  }
+```
+
+## Remove nth node from end
+
+```
+public Node removeNthNodeFromEnd(Node head, int n){
+        if (head.next == null){
+            return null;
+        }
+        int size = 0;
+        Node currentNode = head;
+        while(currentNode != null){
+            currentNode = currentNode.next;
+            size++;
+        }
+        if(n == size){
+            return head.next;
+        }
+        int targetIndex = size-n-1;
+        currentNode = head;
+        int i=0;
+        while(i < targetIndex){
+            currentNode = currentNode.next;
+            i++;
+        }
+        currentNode.next = currentNode.next.next;
+        return head;
+
+    }
+```

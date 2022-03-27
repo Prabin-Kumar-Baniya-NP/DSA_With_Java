@@ -57,6 +57,30 @@ class LinkedList{
     }
     return iteratingNode.data;
   }
+  public Node removeNthNodeFromEnd(Node head, int n){
+    if (head.next == null){
+        return null;
+    }
+    int size = 0;
+    Node currentNode = head;
+    while(currentNode != null){
+        currentNode = currentNode.next;
+        size++;
+    }
+    if(n == size){
+        return head.next;
+    }
+    int targetIndex = size-n-1;
+    currentNode = head;
+    int i=0;
+    while(i < targetIndex){
+        currentNode = currentNode.next;
+        i++;
+    }
+    currentNode.next = currentNode.next.next;
+    return head;
+
+}
 }
 class NthNode{
   public static void main(String args[]){
