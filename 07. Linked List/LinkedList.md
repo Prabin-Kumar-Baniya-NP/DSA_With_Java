@@ -304,3 +304,46 @@ public Node removeNthNodeFromEnd(Node head, int n){
 
     }
 ```
+
+## Check Palindrome in Linked List
+
+```
+public Node reverse(Node head){
+        if(head == null || head.next == null){
+            return head;
+        }
+        Node prevNode = head;
+        Node currentNode = head.next;
+        while(currentNode != null){
+            Node nextNode = currentNode.next;
+            currentNode.next = prevNode;
+
+            prevNode = currentNode;
+            currentNode = nextNode;
+        }
+        head.next = null;
+        head = prevNode;
+        return head;
+    }
+    public Node getMiddleNode(Node head){
+        Node slowIterator = head;
+        Node fastIterator = head;
+        while(fastIterator != null && fastIterator.next != null){
+            slowIterator = slowIterator.next;
+            fastIterator = fastIterator.next.next;
+        }
+        return slowIterator;
+    }
+    public boolean checkPalindrome(Node head){
+        Node firstHalf = head;
+        Node secondHalf = reverse(getMiddleNode(head));
+        while(firstHalf != null && secondHalf != null){
+            if (firstHalf.data != secondHalf.data){
+                return false;
+            }
+            firstHalf = firstHalf.next;
+            secondHalf = secondHalf.next;
+        }
+        return true;
+    }
+```
