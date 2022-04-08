@@ -99,11 +99,11 @@ public static void conquer(int[] arr, int startIndex, int midIndex, int endIndex
                 mergedArray[m++] = arr[i2++];
             }
         }
-        // If there are any remaining elements in first array, put them in merged array 
+        // If there are any remaining elements in first array, put them in merged array
         while (i1 <= midIndex) {
             mergedArray[m++] = arr[i1++];
         }
-        // If there are any remaining elements in second array, put them in merged array 
+        // If there are any remaining elements in second array, put them in merged array
         while (i2 <= endIndex) {
             mergedArray[m++] = arr[i2++];
         }
@@ -126,5 +126,37 @@ public static void conquer(int[] arr, int startIndex, int midIndex, int endIndex
         divide(arr, midIndex + 1, endIndex);
         // After dividing tha array, conquer the array i.e. start merging
         conquer(arr, startIndex, midIndex, endIndex);
+    }
+```
+
+## 5. Quick Sort
+
+- Worst Case of quick sort is O(n^2). This case is when the pivot element is smallest or largest.
+
+```
+public static int partition(int[] arr, int low, int high){
+        int pivot = arr[high];
+        int i = low-1;
+        for(int j= low; j<high; j++){
+            if(arr[j] < pivot){
+                i++;
+                // swap
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        i++;
+        int temp = arr[i];
+        arr[i] = pivot;
+        arr[high] = temp;
+        return i; // pivot index
+    }
+    public static void quickSort(int[] arr, int low, int high) {
+        if(low < high){
+            int pivot = partition(arr, low, high);
+            quickSort(arr, low, pivot-1);
+            quickSort(arr, pivot+1, high);
+        }
     }
 ```
