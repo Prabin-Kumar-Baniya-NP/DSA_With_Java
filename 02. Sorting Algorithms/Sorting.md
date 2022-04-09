@@ -1,5 +1,7 @@
 # Sorting Algorithms
 
+### Time Complexity
+![Time Complexity](https://www.researchgate.net/profile/Mohammad-Qatawneh/publication/334131761/figure/tbl1/AS:775791717658625@1561974567547/The-Time-Complexity-of-Different-Sorting-algorithms-1.png)
 ## 1. Bubble Sort
 
 - Time compplexity will remain O(n^2) in both best case and worst case
