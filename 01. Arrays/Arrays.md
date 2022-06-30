@@ -51,7 +51,16 @@ for(int num: array1){
 
 ## Array Rotation
 
-### 1. Function to reverse the array
+<b>Important Questions</b>
+
+1. Rotate the array by rotating factor "x" in clockwise direction. {1 2 3 4 5} => {3 4 5 1 2}
+2. Rotate the array by rotating factor "x" in anti-clockwise / counter-clockwise direction. {1 2 3 4 5 6} => {5 6 1 2 3 4}
+3. Search an element in rotated sorted array.
+4. Check for pair with a given sum in rotated sorted array.
+5. Find the rotating factor in a given rotated sorted array.
+6. Find minimum element in rotated sorted array.
+
+### Useful Function to reverse the array
 
 ```
 static void reverseArray(int arr[], int start, int end) {
@@ -68,7 +77,7 @@ static void reverseArray(int arr[], int start, int end) {
 
 ---
 
-### 2. Function to rotate the array by d elements in anti-clockwise direction
+### 1. Function to rotate the array by d elements in anti-clockwise direction
 
 ```
 Input:
@@ -100,7 +109,7 @@ static void rotateArr(int arr[], int d, int n)
 
 ---
 
-### 3. Function to rotate the array by d elements in anti-clockwise / counter-clockwise direction
+### 2. Function to rotate the array by d elements in anti-clockwise / counter-clockwise direction
 
 ```
 Input:
@@ -108,7 +117,7 @@ Input:
 2
 
 Output:
-5 6 1 2 4 4
+5 6 1 2 3 4
 
 Time Complexity : O(n)
 Auxiliary Space: O(1)
@@ -116,6 +125,11 @@ Auxiliary Space: O(1)
 
 ```
 static void rotate(int arr[], int r, int n) {
+    if(r==0){
+            return;
+        }
+    // For r>n i.e. rotating factor is greater than the array length
+    r = r % n;
     // reverse the entire array
     reverse(arr, 0, n - 1);
     // Reverse the elements from 0 to r-1
@@ -127,7 +141,7 @@ static void rotate(int arr[], int r, int n) {
 
 ---
 
-### 4. Function to rotate the elements by one in clock-wise direction
+### 3. Function to rotate the elements by one in clock-wise direction
 
 ```
 Input:
@@ -154,7 +168,7 @@ static void rotate(int arr[], int n)
 
 ---
 
-### 5. Search an element in rotated sorted array
+### 4. Search an element in rotated sorted array
 
 ```
 Input:
@@ -167,10 +181,10 @@ Output:
 
 Explanation: 10 is found at index 5.
 
-Time Complexity: O(log n). 
+Time Complexity: O(log n).
 Binary Search requires log n comparisons to find the element. So time complexity is O(log n).
 
-Space Complexity: O(1). 
+Space Complexity: O(1).
 As no extra space is required.
 ```
 
@@ -211,5 +225,95 @@ static int modifiedbinarySearch(int arr[], int key, int start, int end) {
         }
         // Key doesn't falls on this right sorted sub-array
         return modifiedbinarySearch(arr, key, start, mid - 1);
+    }
+```
+
+### 5. Check for pair with a given sum in rotated sorted array
+
+```
+Input: arr[] = {11, 15, 6, 8, 9, 10}, x = 16
+Output: true
+
+There is a pair (6, 10) with sum 16
+
+Time Complexity: O(n)
+
+Auxiliary Space: O(1)
+```
+
+```
+static boolean checkPair(int arr[], int n, int sum) {
+        int smallest, greatest;
+        int i;
+        for (i = 0; i < n; i++) {
+            if (arr[i] > arr[i + 1]) {
+                break;
+            }
+        }
+        greatest = i;
+        smallest = (greatest + 1) % n;
+        while (smallest != greatest) {
+            if (arr[smallest] + arr[greatest] == sum)
+                return true;
+            if (arr[smallest] + arr[greatest] < sum) {
+                smallest = (smallest + 1) % n; // Find another successive smallest
+            } else {
+                greatest = (greatest + n - 1) % n; // Find another successive greatest
+            }
+        }
+        return false;
+    }
+```
+
+### 6. Find the rotating factor in a given rotated sorted array
+
+```
+Input:
+N = 5
+Arr[] = {1, 2, 3, 4, 5}
+
+Output: 0
+Explanation: The given array is not rotated.
+
+Expected Time Complexity: O(log(N))
+
+Expected Auxiliary Space: O(1)
+```
+
+```
+static int findKRotation(int arr[], int n) {
+        for(int i=0; i<n-1; i++){
+	        if(arr[i] > arr[i+1]){
+	            return i+1;
+	        }
+	    }
+	    return 0;
+    }
+```
+
+### 7. Find minimum element in rotated sorted array
+
+```
+Input:
+N = 5
+arr[] = {4 ,5 ,1 ,2 ,3}
+Output: 1
+Explanation: 1 is the minimum element inthe array.
+
+```
+
+```
+static int findMin(int arr[], int n)
+    {
+
+        // For all cases => {4,5,1,2,3} i.e rf >=2
+        for(int i=0; i<n-1; i++){
+            if(arr[i]>arr[i+1])
+                return arr[i+1];
+        }
+        // Edge case => {5,1,2,3,4} i.e rf=1
+        if(arr[0] < arr[1])
+            return arr[0];
+        return -1;
     }
 ```
