@@ -14,6 +14,7 @@
 - It acts as a runtime engine to run our Java program.
 - JVM is responsible for executing Java programs line by line, hence it is also known as an interpreter.
 
+![Image](https://media.geeksforgeeks.org/wp-content/uploads/20210218150010/JDK.png)
 ---
 
 # Conditionals
