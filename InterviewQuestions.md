@@ -296,3 +296,204 @@ Obj3.breadth = obj1.breadth;
 - Example- To get input from the console, we require the scanner class. And the Scanner class is loaded by the ClassLoader.
 
 ---
+
+## Intermediate Questions
+
+---
+
+### 1. What strings is immutable in Java ?
+
+- For optimization
+
+```
+For the optimization of string, designers of Java introduced String pool. String pool is a storage area in Java Heap Memory which stores string literal. To implement the string pool concept, strings was made immutable.
+
+For example:
+String str1 = "Apple";
+String str2 = "Apple";
+
+Both str1 and str2 will point to same string literal "Apple" in String Pool. But if Java strings are not made immutable, str2 can be changed to some other value and eventually it will effect str1.
+```
+
+- Security Reason
+
+```
+If we don't make the String immutable, it will pose a serious security threat to the application.
+For example, database usernames, passwords are passed as strings to receive database connections. The socket programming host and port descriptions are also passed as strings. The String is immutable, so its value cannot be changed. If the String doesn't remain immutable, any hacker can cause a security issue in the application by changing the reference value.
+```
+
+- Thread-Safety Reason
+
+```
+- The String is safe for multithreading because of its immutableness. Different threads can access a    single "String instance". It removes the synchronization for thread safety because we make strings thread-safe implicitly.
+```
+
+---
+
+### 2. What is singleton class in Java and How it is implemented ?
+
+- In object-oriented programming, a singleton class is a class that can have only one object at a time.
+
+- The primary purpose of a Singleton class is to restrict the limit of the number of object creation to only one. This often ensures that there is access control to resources, for example, socket or database connection.
+
+- How to design a singleton class in Java ?
+
+  - Make the constructor private.
+  - Create a static method that has return type of object of that singleton class.
+
+    ```
+    class Singleton {
+        private static Singleton single_instance = null;
+
+        public String s;
+
+        private Singleton()
+        {
+            s = "Hello I am a string part of Singleton class";
+        }
+
+        public static Singleton getInstance()
+        {
+            if (single_instance == null)
+                single_instance = new Singleton();
+
+            return single_instance;
+        }
+    }
+
+    // Main class
+    class MyClass {
+        // Main driver method
+        public static void main(String args[])
+        {
+            // Instantiating Singleton class with variable x
+            Singleton x = Singleton.getInstance();
+
+            // Instantiating Singleton class with variable y
+            Singleton y = Singleton.getInstance();
+
+            // Instantiating Singleton class with variable z
+            Singleton z = Singleton.getInstance();
+
+            // Condition check
+            if (x == y && y == z) {
+                System.out.println("Three objects point to the same memory location on the heap i.e, to the same object");
+            }
+            else {
+                System.out.println("Three objects DO NOT point to the same memory location on the heap");
+            }
+        }
+    }
+    ```
+
+---
+
+### 3. Diffentiate between inteface and abstract class.
+
+```
+The abstract keyword is used to declare abstract class.
+The interface keyword is used to declare interface.
+```
+
+```
+An abstract class can be extended using keyword "extends".
+An interface can be implemented using keyword "implements".
+```
+
+```
+Abstract class doesn't support multiple inheritance.
+Interface supports multiple inheritance.
+```
+
+```
+Abstract class can have abstract and non-abstract method.
+Interaface can have only abstract method. Since Java 8, we can have static and default methods also.
+```
+
+```
+Abstract class can provide the implementation of interface.
+Interface can't provide the implementation of abstract class.
+```
+
+---
+
+### 4. What is Comparator in Java ?
+
+- Consider the example where we have an ArrayList of employees like( EId, Ename, Salary), etc. Now if we want to sort this list of employees based on the names of employees. Then that is not possible to sort using the Collections.sort() method. We need to provide something to the sort() function depending on what values we have to perform sorting. Then in that case a comparator is used.
+
+- Comparator is the interface in java that contains the compare method. And by overloading the compare method, we can define that on what basis we need to compare the values.
+
+---
+
+### 5. Can we override static and private methods ?
+
+No, we cannot override static and private methods because method overriding is based on dynamic binding at runtime and binding of private, static and final methods always happen at compile time.
+
+---
+
+### 6. Why is the character array preferred over string for storing confidential information ?
+
+- In Java, a string is basically immutable i.e. it cannot be modified. After its declaration, it continues to stay in the string pool as long as it is not removed in the form of garbage.
+
+-In other words, a string resides in the heap section of the memory for an unregulated and unspecified time interval after string value processing is executed.
+
+- As a result, vital information can be stolen for pursuing harmful activities by hackers if a memory dump is illegally accessed by them. Such risks can be eliminated by using mutable objects or structures like character arrays for storing any variable.
+
+- After the work of the character array variable is done, the variable can be configured to blank at the same instant. Consequently, it helps in saving heap memory and also gives no chance to the hackers to extract vital data.
+
+### 7. What do we get in the JDK file ?
+
+- JDK
+
+```
+For making java programs, we need some tools that are provided by JDK (Java Development Kit).
+JDK is the package that contains various tools, Compiler, Java Runtime Environment, etc.
+```
+
+- JRE
+
+```
+To execute the java program we need an environment. (Java Runtime Environment) JRE contains a library of Java classes +  JVM. What are JAVA Classes?  It contains some predefined methods that help Java programs to use that feature, build and execute.
+
+For example - there is a system class in java that contains the print-stream method, and with the help of this, we can print something on the console.
+```
+
+- JVM (Java Virtual Machine)
+
+```
+JVM  is a part of JRE that executes the Java program at the end.  Actually, it is part of JRE, but it is software that converts bytecode into machine-executable code to execute on hardware.
+```
+
+---
+
+### 8. Differentiate between constructor and method in Java ?
+
+```
+Constructor is used for initializing the object state.
+Method is used for exposing the object's behavior.
+```
+
+```
+Constructor has no return type.
+Method should have a return type. Even if it does not return anything, return type is void.
+```
+
+```
+Constructor gets invoked implicitly.
+Method has to be invoked on the object explicitly.
+```
+
+```
+If the constructor is not defined, then a default constructor is provided by the java compiler.
+```
+
+```
+The constructor name should be equal to the class name.
+The name of the method can have any name or have a class name too.
+```
+
+```
+A constructor cannot be marked as final because whenever a class is inherited, the constructors are not inherited. Hence, marking it final doesn't make sense. Java throws compilation error saying - modifier final not allowed here
+
+A method can be defined as final but it cannot be overridden in its subclasses.
+```
