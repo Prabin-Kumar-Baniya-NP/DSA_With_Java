@@ -102,7 +102,7 @@ do{
 1. Constructor Overloading
 
 ```
-Method overloading is a technique which allows you to have more than one constructor within the same class but with different functionality.
+Constructor overloading is a technique which allows you to have more than one constructor within the same class but with different functionality.
 ```
 
 2. Method Overloading (Compile-Time Polymorphism)
@@ -127,8 +127,7 @@ Method overriding means when the child class contains the method which is alread
 ### 10. Define copy constructor in Java.
 
 ```
-Copy Constructor is the constructor used when we want to initialize the value to the
-new object from the old object of the same class.
+Copy Constructor is the constructor used when we want to initialize the value to the new object from the old object of the same class.
 ```
 
 ```
@@ -497,3 +496,117 @@ A constructor cannot be marked as final because whenever a class is inherited, t
 
 A method can be defined as final but it cannot be overridden in its subclasses.
 ```
+
+### 9. What is the use of start and run method in Java Multithreading?
+
+- start() method is used for creating a separate call stack for the thread execution.
+- Once the call stack is created, JVM calls the run() method for executing the thread in that call stack.
+
+### 10. What are the different types of Thread Priorities in Java? And what is the default priority of a thread assigned by JVM?
+
+- There are a total of 3 different types of priority available in Java.
+
+  - MIN_PRIORITY: It has an integer value assigned with 1.
+  - MAX_PRIORITY: It has an integer value assigned with 10.
+  - NORM_PRIORITY: It has an integer value assigned with 5.
+
+- In Java, Thread with MAX_PRIORITY gets the first chance to execute.
+- But the default priority for any thread is NORM_PRIORITY assigned by JVM.
+
+### 11. Which among String or String Buffer should be preferred when there are lot of updates required to be done in the data?
+
+- StringBuffer is mutable and dynamic in nature whereas String is immutable.
+- Every updation / modification of String creates a new String thereby overloading the string pool with unnecessary objects.
+- Hence, in the cases of a lot of updates, it is always preferred to use StringBuffer as it will reduce the overhead of the creation of multiple String objects in the string pool.
+
+### 12. How to not allow serialization of attributes of a class in Java?
+
+- In order to achieve this, the attribute can be declared along with the usage of transient keyword.
+
+```
+private transient String someInfo;
+```
+
+### 13. What happens if the static modifier is not included in the main method signature in Java?
+
+- There wouldn't be any compilation error.
+- But then the program is run, since the JVM cant map the main method signature, the code throws “NoSuchMethodError” error at the runtime.
+
+### 14. Consider the below program, identify the output, and also state the reason for that.
+
+```
+public class Main{
+public static void main(String[] args) {
+ System.out.println(" Hello. Main Method. ");
+}
+public static void main(int[] args) {
+ System.out.println(" Hello. Main Method2. ");
+}
+}
+```
+
+- The output of the above program will be Hello. Main Method.
+- This is because JVM will always call the main method based on the definition it already has.
+- Doesn't matter how many main methods we overload it will only execute one main method based on its declaration in JVM.
+
+### 15. Can we make the main() thread a daemon thread?
+
+- In java multithreading, the main() threads are always non-daemon threads.
+- And there is no way we can change the nature of the non-daemon thread to the daemon thread.
+
+### 16. What happens if there are multiple main methods inside one class in Java?
+
+- The program can't compile as the compiler says that the method has been already defined inside the class.
+
+### 17. How does an exception propagate in the code?
+
+- When an exception occurs, first it searches to locate the matching catch block. In case, the matching catch block is located, then that block would be executed. Else, the exception propagates through the method call stack and goes into the caller method where the process of matching the catch block is performed. This propagation happens until the matching catch block is found. If the match is not found, then the program gets terminated in the main method.
+
+### 18. Is it mandatory for a catch block to be followed after a try block?
+
+- No, it is not necessary for a catch block to be present after a try block.
+- A try block should be followed either by a catch block or by a finally block.
+- If the exceptions likelihood is more, then they should be declared using the throws clause of the method.
+
+### 19. Will the finally block get executed when the return statement is written at the end of try block and catch block as shown below?
+
+```
+public int someMethod(int i){
+   try{
+       //some statement
+       return 1;
+   }catch(Exception e){
+       //some statement
+       return 999;
+   }finally{
+       //finally block statements
+   }
+}
+```
+
+- finally block will be executed irrespective of the exception or not.
+- The only case where finally block is not executed is when it encounters ‘System.exit()’ method anywhere in try/catch block.
+
+### 20. Contiguous memory locations are usually used for storing actual values in an array but not in ArrayList. Explain.
+
+- In the case of ArrayList, data storing in the form of primitive data types (like int, float, etc.) is not possible.
+- The data members/objects present in the ArrayList have references to the objects which are located at various sites in the memory.
+- Thus, storing of actual objects or non-primitive data types (like Integer, Double, etc.) takes place in various memory locations.
+
+### 21. Why does the java array index start with 0?
+
+- It is because the 0 index array avoids the extra arithmetic operation to calculate the memory address.
+
+- Example - Consider the array and assume each element takes 4-byte memory space.
+
+- Now if we want to access index 4. Then internally java calculates the address using the formula-
+
+  - [Base Address + (index * no_of_bytes)].
+  - So according to this. The starting address of the index 4 will be - [100 + (4*4)] = 116.
+
+- Now consider the same with 1 index Array
+
+  - Now if we apply the same formula here. Then we get - 116 as the starting address of the 4th index. Which is wrong.
+  - Then we need to apply formula - [Base Address + ((index-1) * no_of_bytes)].
+  - And for calculating this, an extra arithmetic operation has to be performed.
+  - And consider the case where millions of addresses need to be calculated, this causes complexity. So to avoid this, the index array is supported by java.
