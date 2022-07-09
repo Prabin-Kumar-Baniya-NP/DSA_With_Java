@@ -630,3 +630,213 @@ return 999;
   - And consider the case where millions of addresses need to be calculated, this causes complexity. So to avoid this, the index array is supported by java.
 
 ---
+
+## Advanced Questions
+
+---
+
+### 1. Explain Association, Aggregation, Composition, Generalization, Specialization.
+
+- Association:
+
+  - If two classes in a model need to communicate with each other, there must be a link between them, and that can be represented by an association
+  - ![Association](https://cdn-images.visual-paradigm.com/guide/uml/uml-aggregation-vs-composition/01-uml-association.png)
+  - Example 1 : A single student can associate with multiple teachers.
+  - Example 2 : Every Instructor has one or more Students.
+  - Aggregation and Composition are subsets of association
+
+- Aggregation:
+
+  - Aggregation is a subset of Association.
+  - ![Aggregation](https://cdn-images.visual-paradigm.com/guide/uml/uml-aggregation-vs-composition/02-uml-aggregation.png)
+  - Aggregation implies a relationship where the child can exist independently of the parent.
+  - Example: Class (parent) and Student (child). Delete the Class and the Students still exist.
+
+- Composition:
+
+  - Composition is a subset of Association.
+  - ![Composition](https://cdn-images.visual-paradigm.com/guide/uml/uml-aggregation-vs-composition/03-uml-composition.png)
+  - Composition implies a relationship where the child cannot exist independent of the parent.
+  - Example: House (parent) and Room (child). Rooms don't exist separate to a House.
+
+- Generalization:
+
+  - Generalization is a mechanism for combining similar classes of objects into a single, more general class.
+  - Generalization is the term that we use to denote abstraction of common properties into a base class in UML.
+  - The UML diagram's Generalization association is also known as Inheritance.
+  - When we implement Generalization in a programming language, it is often called Inheritance instead. Generalization and inheritance are the same.
+  - The terminology just differs depending on the context where it is being used.
+
+- Specialization:
+
+  - Specialization is the reverse process of Generalization means creating new sub-classes from an existing class.
+
+---
+
+### 2. Although inheritance is a popular OOPs concept, it is less advantageous than composition.
+
+- The composition is a design technique in which your class can have an instance of another class as a field of your class.
+- Inheritance is a mechanism under which one object can acquire the properties and behavior of the parent object by extending a class.
+
+- Inheritance Example:
+  ```
+  class Animal{
+  String name="Orio";
+  }
+  class Dog extends Animal{
+  String type="Dog";
+  public static void main(String args[]){
+      Dog p=new Dog();
+      System.out.println("Name:"+p.name);
+      System.out.println("Type:"+p.type);
+  }
+  }
+  ```
+- Composition Example:
+
+  ```
+  public class Student {
+  }
+  public class College {
+  private Student student;
+  public College() {
+      this.student = new Student();
+  }
+  }
+  ```
+
+- Inheritance lags behind composition in the following scenarios:
+
+  - Multiple-inheritance is not possible in Java. Classes can only extend from one superclass. In cases where multiple functionalities are required, for example - to read and write information into the file, the pattern of composition is preferred. The writer, as well as reader functionalities, can be made use of by considering them as the private members.
+
+  - Composition assists in attaining high flexibility and prevents breaking of encapsulation.
+
+  - Unit testing is possible with composition and not inheritance. When a developer wants to test a class composing a different class, then Mock Object can be created for signifying the composed class to facilitate testing. This technique is not possible with the help of inheritance as the derived class cannot be tested without the help of the superclass in inheritance.
+
+- The loosely coupled nature of composition is preferable over the tightly coupled nature of inheritance.
+
+---
+
+### 3. How is the creation of a String using new() different from that of a literal?
+
+<b>Creating String Using String Literal:</b>
+
+```
+String first = "InterviewBit";
+String second = "InterviewBit";
+```
+
+This two line of code will create a single string literal in String pool and first and second will point to same string literal.
+
+<b>Creating String using new keyword:</b>
+
+```
+String first = new String("InterviewBit");
+String second = new String("InterviewBit");
+```
+
+This two line of code will create two different string object in heap memory not in String pool and first and second will point to different string object in heap memory.
+
+---
+
+### 4. Why is synchronization necessary ?
+
+- Concurrent execution of different processes is made possible by synchronization.
+- When a particular resource is shared between many threads, situations may arise in which multiple threads require the same shared resource.
+- Synchronization assists in resolving the issue and the resource is shared by a single thread at a time. Let’s take an example to understand it more clearly.
+
+---
+
+### 5. In the given code below, what is the significance of ... ?
+
+```
+public void fooBarMethod(String... variables){
+   // method code
+}
+```
+
+- Ability to provide ... is a feature called varargs (variable arguments) which was introduced as part of Java 5.
+- The function having ... in the above example indicates that it can receive multiple arguments of the datatype String.
+
+---
+
+### 6. Explain Life cycle of thread in Java ?
+
+- In Java, a thread always exists in any one of the following states. These states are:
+
+  - New
+  - Active
+  - Blocked / Waiting
+  - Timed Waiting
+  - Terminated
+
+- New
+
+  - Whenever a new thread is created, it is always in the new state. For a thread in the new state, the code has not been run yet and thus has not begun its execution.
+
+- Active
+
+  - When a thread invokes the start() method, it moves from the new state to the active state.
+  - The active state contains two states within it:
+
+    - one is runnable,
+    - the other is running.
+
+  - Runnable :
+
+    - In the runnable state, the thread may be running or may be ready to run at any given instant of time.
+    - It is the duty of the thread scheduler to provide the thread time to run, i.e., moving the thread the running state.
+
+  - Running:
+    - When the thread gets the CPU, it moves from the runnable to the running state.
+    - Generally, the most common change in the state of a thread is from runnable to running and again back to runnable.
+
+- Blocked / Waiting
+
+  - Whenever a thread is inactive for a span of time (not permanently) then, either the thread is in the blocked state or is in the waiting state.
+  - When the main thread invokes the join() method then, it is said that the main thread is in the waiting state.
+  - The main thread then waits for the child threads to complete their tasks.
+  - When the child threads complete their job, a notification is sent to the main thread, which again moves the thread from waiting to the active state.
+
+- Timed Waiting
+
+  - Sometimes, waiting for leads to starvation.
+  - For example, a thread (its name is A) has entered the critical section of a code and is not willing to leave that critical section.
+  - In such a scenario, another thread (its name is B) has to wait forever, which leads to starvation. To avoid such scenario, a timed waiting state is given to thread B.
+  - Thus, thread lies in the waiting state for a specific span of time, and not forever.
+  - A real example of timed waiting is when we invoke the sleep() method on a specific thread.
+  - The sleep() method puts the thread in the timed wait state. After the time runs out, the thread wakes up and start its execution from when it has left earlier.
+
+- Termination
+  - A thread reaches the termination state because of the following reasons:
+    - When a thread has finished its job, then it exists or terminates normally.
+    - Abnormal termination: It occurs when some unusual events such as an unhandled exception or segmentation fault.
+
+---
+
+### 7. What are the possible ways of making object eligible for garbage collection (GC) in Java?
+
+- Approach 1 : Set the object references to null once the object creation purpose is served.
+- Approach 2 : Point the reference variable to another object. Doing this, the object which the reference variable was referencing before becomes eligible for GC.
+
+---
+
+### 8. What is a Memory Leak ?
+
+- The Java Garbage Collector (GC) typically removes unused objects when they are no longer required, but when they are still referenced, the unused objects cannot be removed.
+- So this causes the memory leak problem.
+
+- Some common causes of Memory leaks are -
+  - When there are Unbounded caches.
+  - Excessive page swapping is done by the operating system.
+  - Improper written custom data structures.
+  - Inserting into a collection object without first deleting it.
+    etc.
+
+---
+
+### 9. Assume a thread has a lock on it, calling the sleep() method on that thread will release the lock?
+
+- A thread that has a lock won't be released even after it calls sleep(). Despite the thread sleeping for a specified period of time, the lock will not be released.
+
+---
