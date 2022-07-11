@@ -116,6 +116,22 @@ public void deleteAtEnd(){
     }
 ```
 
+- Delete an item
+
+```
+public void deleteItem(int item) {
+        if (this.head == null) {
+            return;
+        }
+        Node iterator = this.head;
+        while (iterator.next != null && iterator.next.data != item) {
+            iterator = iterator.next;
+        }
+        iterator.next = iterator.next.next;
+        return;
+    }
+```
+
 ## Reverse The Linked List
 
 ### Iterative Approach
@@ -160,7 +176,7 @@ public void reverseIterate(){
     public boolean detectCycle(){
         Node slowIterator = head;
         Node fastIterator = head;
-        while(fastIterator != null && fastIterator.next != null){
+        while(slowIterator.next != null && fastIterator.next.next != null){
             slowIterator = slowIterator.next;
             fastIterator = fastIterator.next.next;
             if (slowIterator == fastIterator)
