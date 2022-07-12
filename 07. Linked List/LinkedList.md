@@ -132,6 +132,44 @@ public void deleteItem(int item) {
     }
 ```
 
+## Search an element from the linked list
+
+## Iterative Approach
+
+```
+public int search(int item) {
+        if (this.head == null)
+            return -1;
+        int i = 0;
+        Node iterator = this.head;
+        while (iterator != null) {
+            if (iterator.data == item)
+                return i;
+            i++;
+            iterator = iterator.next;
+        }
+        return -1;
+    }
+```
+
+### Recursive Approach
+
+```
+public int search(Node currentNode, int index, int item) {
+        if (currentNode == null) {
+            return -1;
+        }
+        if (currentNode.data == item)
+            return index;
+
+        return search(currentNode.next, ++index, item);
+    }
+// Wrapper Function
+public int recursiveSearch(int item) {
+        return search(this.head, 0, item);
+    }
+```
+
 ## Reverse The Linked List
 
 ### Iterative Approach
@@ -361,5 +399,20 @@ public Node reverse(Node head){
             secondHalf = secondHalf.next;
         }
         return true;
+    }
+```
+
+## Remove Duplicate from sorted linked list without using extra space.
+
+```
+public void removeDuplicate() {
+        Node current = head;
+
+        while (current.next != null) {
+            if (current.data == current.next.data)
+                current.next = current.next.next;
+            else
+                current = current.next;
+        }
     }
 ```
