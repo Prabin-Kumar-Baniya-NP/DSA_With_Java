@@ -1,43 +1,48 @@
 # Stack (Last In First Out) [LIFO]
 
-## Implementation Using Linked List
+## Implementation Using Array
 
 ```
-static class Node{
-        int data;
-        Node next;
-        Node(int item){
-            this.data = item;
-        }
+class Stack {
+    int arr[];
+    int top;
+    int capacity;
+
+    Stack(int capacity) {
+        arr = new int[capacity];
+        this.capacity = capacity;
+        this.top = -1;
     }
-    static class Stack{
-        public static Node head;
-        public static boolean isEmpty(){
-            return head == null;
+
+    public boolean isEmpty() {
+        return this.top == -1;
+    }
+
+    public boolean isFull() {
+        return capacity == top + 1;
+    }
+
+    public void push(int item) {
+        if (this.isFull()) {
+            return;
         }
-        public static void push(int item){
-            if(isEmpty()){
-                head = new Node(item);
-                return ;
-            }
-            Node newNode = new Node(item);
-            newNode.next = head;
-            head = newNode;
+        arr[++top] = item;
+    }
+
+    public int pop() {
+        if (this.isEmpty()) {
+            return -1;
         }
-        public static int pop(){
-            if(isEmpty()){
-                return -1;
-            }
-            int top = head.data;
-            head = head.next;
-            return top;
+        return arr[top--];
+    }
+
+    public int peek() {
+        if (this.isEmpty()) {
+            return -1;
         }
-        public static int peek(){
-            if(isEmpty()){
-                return -1;
-            }
-            return head.data;
-        }
+        return arr[top];
+    }
+}
 ```
 
 ## Implementation Using Array List
@@ -45,48 +50,85 @@ static class Node{
 ```
 import java.util.ArrayList;
 
-public class ArrayListImplementation {
-    static class Stack {
-        static ArrayList<Integer> list = new ArrayList<>();
+class Stack {
+    ArrayList<Integer> s = new ArrayList<Integer>();
 
-        public static boolean isEmpty() {
-            return list.size() == 0;
-        }
-
-        public static void push(int item) {
-            list.add(item);
-        }
-
-        public static int pop() {
-            if (isEmpty()) {
-                return -1;
-            }
-            int top = list.get(list.size() - 1);
-            list.remove(list.size() - 1);
-            return top;
-        }
-
-        public static int peek() {
-            if (isEmpty()) {
-                return -1;
-            }
-            return list.get(list.size() - 1);
-        }
+    // isEmpty()
+    public boolean isEmpty() {
+        return s.isEmpty();
     }
 
-    public static void main(String[] args) {
-        Stack s = new Stack();
-        s.push(1);
-        s.push(2);
-        s.push(3);
-        s.push(4);
-        while (!s.isEmpty()) {
-            System.out.println(s.peek());
-            s.pop();
-        }
+    // push()
+    public boolean push(int item) {
+        return s.add(item);
+    }
+
+    // pop()
+    public int pop() {
+        if (this.isEmpty())
+            return -1;
+        return s.remove(s.size() - 1);
+    }
+
+    // peek()
+    public int peek() {
+        if (this.isEmpty())
+            return -1;
+        return s.get(s.size() - 1);
+    }
+
+}
+
+```
+
+## Implementation Using Linked List
+
+```
+class Node {
+    int data;
+    Node next;
+
+    Node(int item) {
+        this.data = item;
     }
 }
 
+class Stack {
+    Node head;
+
+    // utility function -> isEmpty()
+    public boolean isEmpty() {
+        return this.head == null;
+    }
+
+    // push
+    public void push(int item) {
+        if (this.isEmpty() == true) {
+            this.head = new Node(item);
+            return;
+        }
+        Node newNode = new Node(item);
+        newNode.next = head;
+        head = newNode;
+    }
+
+    // pop
+    public void pop() {
+        if (this.isEmpty() == true) {
+            return;
+        }
+        head = head.next;
+        return;
+    }
+
+    // peek
+    public int peek() {
+        if (this.isEmpty() == true) {
+            return -1;
+        }
+        return head.data;
+    }
+}
 ```
 
 ## Implementation Using Collection Framework
