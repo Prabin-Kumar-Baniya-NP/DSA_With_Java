@@ -311,7 +311,7 @@ static int findMin(int arr[], int n)
             if(arr[i]>arr[i+1])
                 return arr[i+1];
         }
-        // Edge case => {5,1,2,3,4} i.e rf=1
+        // Edge case => {1,2,3,4,5}
         if(arr[0] < arr[1])
             return arr[0];
         return -1;
