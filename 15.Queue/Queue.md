@@ -50,6 +50,8 @@ class Queue {
 
 ## Circular Queue Using Array
 
+- A Circular Queue is a special version of queue where the last element of the queue is connected to the first element of the queue forming a circle.
+
 ```
 class CircularQueue {
     int arr[];
@@ -201,6 +203,133 @@ public class QueueUsingCollection {
             System.out.println(q1.peek());
             q1.remove();
         }
+    }
+}
+```
+
+## Queue using Stack
+
+- Two Approach
+  - Push - O(n), Pop - O(1) => Front (Stack Top), Rear (Stack Bottom)
+  - Pop - O(n), Peek - O(n) => Front (Stack Bottom), Rear (Stack Top)
+
+### Push - O(n), Pop - O(1)
+
+```
+import java.util.Stack;
+
+class Queue {
+    Stack<Integer> s1 = new Stack<Integer>();
+    Stack<Integer> s2 = new Stack<Integer>();
+
+    public boolean isEmpty() {
+        return s1.isEmpty();
+    }
+
+    public void add(int item) {
+        // Move all s1 elements to s2
+        while (!s1.isEmpty()) {
+            s2.push(s1.pop());
+        }
+        // Put item in s1
+        s1.push(item);
+        // Move all s2 elements to s1
+        while (!s2.isEmpty()) {
+            s1.push(s2.pop());
+        }
+    }
+
+    public int remove() {
+        if (isEmpty())
+            return -1;
+        return s1.pop();
+    }
+
+    public int peek() {
+        if (isEmpty())
+            return -1;
+        return s1.peek();
+    }
+}
+```
+
+### Pop - O(n), Peek - O(n)
+
+```
+class Queue {
+    Stack<Integer> s1 = new Stack<Integer>();
+    Stack<Integer> s2 = new Stack<Integer>();
+
+    public boolean isEmpty() {
+        return s1.isEmpty();
+    }
+
+    public void add(int item) {
+        s1.push(item);
+        return;
+    }
+
+    public int remove() {
+        while(!s1.isEmpty()){
+            s2.push(s1.pop());
+        }
+        int removedItem = s2.pop();
+        while(!s2.isEmpty()){
+            s1.push(s2.pop());
+        }
+        return removedItem;
+    }
+
+    public int peek() {
+        if (s1.isEmpty()) {
+            return -1;
+        }
+        int front = -1;
+        while(!s1.isEmpty()){
+            front = s1.pop();
+        }
+        return front;
+    }
+}
+```
+
+## Dequeue
+
+- Deque or Double Ended Queue is a generalized version of Queue data structure that allows insert and delete at both ends.
+
+- Operations on Deque: Mainly the following four basic operations are performed on queue:
+
+  - insertFront(): Adds an item at the front of Deque.
+  - insertLast(): Adds an item at the rear of Deque.
+  - deleteFront(): Deletes an item from the front of Deque.
+  - deleteLast(): Deletes an item from the rear of Deque.
+  - getFront(): Gets the front item from the queue.
+  - getRear(): Gets the last item from queue.
+  - isEmpty(): Checks whether Deque is empty or not.
+  - isFull(): Checks whether Deque is full or not.
+
+- Application:
+  - Applied as both stack and queue, as it supports both operations.
+  - Storing a web browser’s history.
+  - Storing a software application’s list of undo operations.
+  - Job scheduling algorithm
+
+### Dequeue using Collection Framework - ArrayDequeue
+
+```
+import java.util.ArrayDeque;
+
+public class Dequeue {
+    public static void main(String[] args) {
+        ArrayDeque<Integer> q = new ArrayDeque<Integer>();
+        q.addFirst(1);
+        q.addLast(2);
+        q.removeFirst();
+        q.removeLast();
+        q.addFirst(12);
+        q.addLast(22);
+        System.out.println(q.getFirst());
+        System.out.println(q.getLast());
     }
 }
 ```
