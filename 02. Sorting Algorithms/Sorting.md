@@ -1,10 +1,17 @@
 # Sorting Algorithms
 
 ### Time Complexity
+
 ![Time Complexity](https://www.researchgate.net/profile/Mohammad-Qatawneh/publication/334131761/figure/tbl1/AS:775791717658625@1561974567547/The-Time-Complexity-of-Different-Sorting-algorithms-1.png)
+
 ## 1. Bubble Sort
 
-- Time compplexity will remain O(n^2) in both best case and worst case
+- Bubble out the largest element to the end of the array
+- Example for {5,4,3,2,1}
+  - Step 1: {5,4,3,2,1} => {4,3,2,1,5}
+  - Step 2: {4,3,2,1} => {3,2,1,4,5}
+  - Step 3: {3,2,1} => {2,1,3,4,5}
+  - Step 4: {2,1} => {1,2,3,4,5}
 
 ```
 void sort(int[] array)
@@ -43,17 +50,27 @@ void optimized_sort(int[] array)
 
 ## 2. Selection Sort
 
+- Select the minimum element in the unsorted array and put it at the starting index of unsorted array.
+- Example for {5,4,3,2,1}
+  - Step 1: {5,4,3,2,1} => {1,5,4,3,2}
+  - Step 2: {5,4,3,2} => {1,2,5,4,3}
+  - Step 3: {5,4,3} => {1,2,3,5,4}
+  - Step 4: {5,4} => {1,2,3,4,5}
+
 ```
 void selectionSort(int[] array) {
 		// One by one we have to move the boundary to unsorted array
 		for (int i = 0; i < (array.length - 1); i++) {
+
 			// Assume the first index of the current boundary is having minimum value
 			int minimum_index = i;
+
 			// Check for every element after minimum index whether it holds minimum value or not
 			for (int j = i + 1; j < array.length; j++) {
 				if (array[j] < array[minimum_index])
 					minimum_index = j;
 			}
+
 			// Swap the element in minimum_index with i
 			int temp = array[minimum_index];
 			array[minimum_index] = array[i];
@@ -64,18 +81,25 @@ void selectionSort(int[] array) {
 
 ## 3. Insertion Sort
 
+- Divide the array into sorted and unsorted part and move first element of unsorted array into right position in sorted array.
+- Example for {5,4,3,2,1}
+  - Step 1: {5}, {4,3,2,1} => {4,5}, {3,2,1}
+  - Step 2: {4,5}, {3,2,1} => {3,4,5}, {2,1}
+  - Step 3: {3,4,5}, {2,1} => {2,3,4,5}, {1}
+  - Step 4: {2,3,4,5}, {1} => {1,2,3,4,5}, {}
+
 ```
 public void sort(int array[]) {
-		for (int i = 1; i < array.length; i++) {
-			int current = array[i];
-			int j = i - 1;
-			while (j >= 0 && array[j] > current) {
-				// Keep swapping
-				array[j + 1] = array[j];
-				j--;
-			}
-			array[j + 1] = current;
-		}
+        for(int i=1; i<arr.length; i++){
+            int temp = arr[i];
+            int j = i-1; // Sorted Part => 0 to j
+            while(j>=0 && arr[j] > temp){
+                // Move one element one step ahead
+                arr[j+1] = arr[j];
+                j--;
+            }
+            arr[j+1] = temp;
+        }
 	}
 ```
 

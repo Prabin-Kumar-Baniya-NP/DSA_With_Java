@@ -391,6 +391,22 @@ public class RemoveDuplicatesFromString {
 
 ```
 
+```
+public static String removeSuccessiveDuplicates(String str){
+        if(str.length() == 1){
+            return str;
+        }
+        char currentChar = str.charAt(0);
+        String nextString = removeSuccessiveDuplicates(str.substring(1));
+        if(currentChar == nextString.charAt(0)){
+            return nextString;
+        }
+        else{
+            return Character.toString(currentChar).concat(nextString);
+        }
+    }
+```
+
 ### 7. Subsequences of String
 
 ```
@@ -405,7 +421,9 @@ public class SubsequencesOfString {
             return;
         }
         char currentChar = str.charAt(index);
+        // include
         subsequences(str, index + 1, newString + currentChar);
+        // exclude
         subsequences(str, index + 1, newString);
     }
 
@@ -437,7 +455,9 @@ public class UniqueSubsequencesOfString {
             }
         }
         char currentChar = str.charAt(index);
+        // include
         uniqueSubsequence(str, index + 1, newString + currentChar, set);
+        // exclude
         uniqueSubsequence(str, index + 1, newString, set);
     }
 
